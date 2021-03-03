@@ -6,12 +6,12 @@
 if [ "$#" -ne 2 ]; then
     echo "Missing version or comments arguments! Usage: ./generate_tag.sh 'tag_version' 'comments'"
 else
-    echo "Moving to master branch "
-    git checkout master
+    echo "Moving to main branch "
+    git checkout main
 
     echo "Tagging code for production release"
     git tag -a $1 -m "$2"
 
-    echo "Pushing tag to master branch"
+    echo "Pushing tag to main branch"
     git push origin $1
 fi

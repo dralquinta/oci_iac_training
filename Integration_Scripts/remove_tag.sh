@@ -6,8 +6,8 @@
 if [ "$#" -ne 1 ]; then
     echo "Missing tag version argument! Usage: ./remove_tag.sh tag_version"
 else
-    echo "Moving to master branch "
-    git checkout master
+    echo "Moving to main branch "
+    git checkout main
 
     echo "Removing local tag"
     git tag -d $1
