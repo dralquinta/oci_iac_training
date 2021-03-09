@@ -79,6 +79,7 @@ echo -e "[7/9] Done.\n\n"
 echo "[8/9] Create SSH Keys"
 cd /home/opc/.ssh/OCI_KEYS/SSH
 ssh-keygen -t rsa -N "" -b 2048 -C "autossh" -f ./auto_ssh_id_rsa
+cp auto_ssh_id_rsa ../../id_rsa
 echo -e "[8/9] Done.\n\n"
 
 echo "[9/9] Disabling epel repo"
