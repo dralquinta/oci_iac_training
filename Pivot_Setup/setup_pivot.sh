@@ -7,7 +7,7 @@ EOF
 
 
 
-echo "[1/10] Customizing Wandisco repository and enabling epel repo "
+echo "[1/10] Customizing Wandisco repository and enabling kubernetes, epel repo "
 sudo tee -a /etc/yum.repos.d/wandisco-git.repo  > /dev/null <<'EOF'
 [wandisco-git]
 name=Wandisco GIT Repository
@@ -19,16 +19,29 @@ EOF
 sudo rpm --import http://opensource.wandisco.com/RPM-GPG-KEY-WANdisco
 
 sudo sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/oracle-epel-ol7.repo
+
+sudo tee -a /etc/yum.repos.d/kubernetes.repo  > /dev/null <<'EOF'
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+
 echo -e "[1/10] Done.\n\n"
 
 #Utilitary Install
 
-echo "[2/10] Installing basic packages (git, ansible, python, etc.)"
+echo "[2/10] Installing basic packages (git, ansible, python, go, kubectl, etc.)"
 sudo yum -y install go 
 sudo yum -y install git
 sudo yum -y install ansible
 sudo yum -y install java
 sudo yum -y install python3
+sudo yum -y install kubectl
 
 #
 # Extra tools (PIP & OCI plugins)
@@ -90,3 +103,18 @@ echo -e "[9/10] Done.\n\n"
 echo "[10/10] Installing K9s"
 curl -sS https://webinstall.dev/k9s | bash
 echo -e "[10/10] Done.\n\n"
+
+echo "[11/10] Installing OCI-CLI"
+sudo runuser -l opc -c 'mkdir -p /home/opc/oci_cli'
+sudo runuser -l opc -c 'wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh'
+sudo runuser -l opc -c 'chmod +x install.sh'
+sudo runuser -l opc -c '/home/opc/install.sh --install-dir /home/opc/oci_cli/lib/oracle-cli --exec-dir /home/opc/oci_cli/bin --accept-all-defaults'
+sudo runuser -l opc -c 'cp -rl /home/opc/bin /home/opc/oci_cli'
+sudo runuser -l opc -c 'rm -r /home/opc/bin'
+sudo runuser -l opc -c 'mkdir -p /home/opc/.oci'
+sudo runuser -l opc -c 'chmod 600 /home/opc/.oci'
+sudo runuser -l opc -c 'touch /home/opc/.oci/config'
+sudo runuser -l opc -c 'oci setup repair-file-permissions --file /home/opc/.oci/config'
+echo -e "[11/10] Done.\n\n"
+
+
