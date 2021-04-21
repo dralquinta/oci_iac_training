@@ -42,6 +42,7 @@ sudo yum -y install ansible
 sudo yum -y install java
 sudo yum -y install python3
 sudo yum -y install kubectl
+sudo yum -y install docker
 
 #
 # Extra tools (PIP & OCI plugins)
