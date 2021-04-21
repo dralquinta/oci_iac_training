@@ -50,7 +50,7 @@ sudo runuser -l opc -c 'curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get
 sudo runuser -l opc -c 'python get-pip.py'
 sudo runuser -l opc -c 'pip install "pywinrm>=0.2.2"'
 sudo runuser -l opc -c 'pip install oci'
-sudo runuser -l opc -c 'pip install kubernetes'
+sudo runuser -l opc -c 'pip3 install kubernetes'
 echo -e "[2/10] Done.\n\n"
 
 echo "[3/10] Update OS"
