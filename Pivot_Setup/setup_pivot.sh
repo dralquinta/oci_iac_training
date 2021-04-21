@@ -43,6 +43,11 @@ sudo yum -y install java
 sudo yum -y install python3
 sudo yum -y install kubectl
 sudo yum -y install docker
+sudo usermod -a -G docker $USER
+sudo usermod -a -G docker $USER
+sudo systemctl enable docker.service 
+sudo systemctl start docker.service 
+sudo chmod 666 /var/run/docker.sock
 
 #
 # Extra tools (PIP & OCI plugins)
