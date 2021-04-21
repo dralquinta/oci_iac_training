@@ -124,4 +124,10 @@ sudo runuser -l opc -c 'touch /home/opc/.oci/config'
 sudo runuser -l opc -c 'oci setup repair-file-permissions --file /home/opc/.oci/config'
 echo -e "[11/10] Done.\n\n"
 
+echo "[12/10] Disabling firewall"
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
+sudo systemctl mask --now firewalld
+echo "[12/10] Done"
+
 
