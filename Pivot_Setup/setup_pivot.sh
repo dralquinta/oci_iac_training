@@ -3,6 +3,7 @@ sudo tee -a /home/opc/.bashrc > /dev/null <<'EOF'
 export PATH="/home/opc/Terraform":${PATH}
 alias ocibe="cd /home/opc/REPOS/OCIBE"
 alias ocife="cd /home/opc/REPOS/OCIFE"
+alias k="kubectl"
 EOF
 
 
@@ -119,7 +120,6 @@ sudo runuser -l opc -c '/home/opc/install.sh --install-dir /home/opc/oci_cli/lib
 sudo runuser -l opc -c 'cp -rl /home/opc/bin /home/opc/oci_cli'
 sudo runuser -l opc -c 'rm -r /home/opc/bin'
 sudo runuser -l opc -c 'mkdir -p /home/opc/.oci'
-sudo runuser -l opc -c 'chmod 600 /home/opc/.oci'
 sudo runuser -l opc -c 'touch /home/opc/.oci/config'
 sudo runuser -l opc -c 'oci setup repair-file-permissions --file /home/opc/.oci/config'
 echo -e "[11/10] Done.\n\n"
